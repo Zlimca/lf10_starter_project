@@ -1,4 +1,15 @@
 <app-menu></app-menu>
-<div>
-
-</div>
+<table class="table">
+  <thead class="thead-dark">
+    <th>ID</th>
+    <th>Name</th>
+    <th>Nachname</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of employees">
+      <td>{{employee.id}}</td>
+      <td>{{employee.firstName}}</td>
+      <td>{{employee.lastName}}</td>
+    </tr>
+  </tbody>
+</table>
