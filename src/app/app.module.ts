@@ -9,6 +9,8 @@ import { EmployeeComponent } from './employee/employee.component';
 import { LoginComponent } from './login/login.component';
 import { MenuComponent } from './menu/menu.component';
 import {RouterModule} from "@angular/router";
+import {FormsModule} from "@angular/forms";
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import {RouterModule} from "@angular/router";
     imports: [
         BrowserModule,
         HttpClientModule,
-        RouterModule
+        RouterModule,
+        FormsModule,
+        AppRoutingModule
     ],
   providers: [],
   bootstrap: [AppComponent]

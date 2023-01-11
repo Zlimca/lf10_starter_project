@@ -9,11 +9,20 @@ import {EmployeeService} from "../employee.service";
 })
 export class EmployeeListComponent implements OnInit {
   employees: Employee[] = []
+  selectedEmployee?: Employee
   constructor(private employeeService: EmployeeService) {
   }
 
   ngOnInit(): void {
     this.getEmployees()
+  }
+
+  onSelect(employee: Employee): void {
+    this.selectedEmployee = employee
+  }
+
+  delete(employee: Employee): void {
+    console.log(employee)
   }
 
   getEmployees(): void {

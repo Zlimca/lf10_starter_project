@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Employee} from "../Employee";
+import {ActivatedRoute} from "@angular/router";
+import {EmployeeService} from "../employee.service";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-employee-details',
@@ -6,10 +10,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./employee-details.component.css']
 })
 export class EmployeeDetailsComponent implements OnInit {
-
-  constructor() { }
+  public employee?: Employee
+  constructor(private route: ActivatedRoute, private employeeService: EmployeeService, private location: Location) { }
 
   ngOnInit(): void {
+    this.getEmployee()
+    this.getEditMode();
+  }
+
+  onBack(): void {
+    this.location.back();
+  }
+
+  getEmployee(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'))
+    this.employeeService.getEmployeeById(id)
+      .subscribe(employee => this.employee = employee)
+  }
+
+  getEditMode(): void {
+    // TODO: decide edit mode
   }
 
 }

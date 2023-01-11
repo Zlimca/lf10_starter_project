@@ -7,9 +7,12 @@
   </thead>
   <tbody>
     <tr *ngFor="let employee of employees">
-      <td>{{employee.id}}</td>
+      <td><button type="button" (click)="onSelect(employee)">{{employee.id}}</button></td>
       <td>{{employee.firstName}}</td>
       <td>{{employee.lastName}}</td>
+      <td><button type="button" routerLink="/employee/{{employee.id}}">Details</button></td>
+      <td><button type="button" routerLink="/employee/edit/{{employee.id}}">Bearbeiten</button></td>
+      <td><button type="button" (click)="delete(employee)">Löschen</button></td>
     </tr>
   </tbody>
 </table>
