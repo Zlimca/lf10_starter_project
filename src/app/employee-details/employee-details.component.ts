@@ -11,16 +11,12 @@ import {Location} from "@angular/common";
 })
 export class EmployeeDetailsComponent implements OnInit {
   public employee?: Employee
-  constructor(private route: ActivatedRoute, private employeeService: EmployeeService, private location: Location) { }
+  constructor(private route: ActivatedRoute, private employeeService: EmployeeService) { }
   public pageTitle = "Mitarbeiter-Details";
 
   ngOnInit(): void {
     this.getEmployee()
     this.getEditMode();
-  }
-
-  onBack(): void {
-    this.location.back();
   }
 
   getEmployee(): void {

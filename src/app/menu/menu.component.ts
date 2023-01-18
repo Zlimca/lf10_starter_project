@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Location} from '@angular/common';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-menu',
@@ -9,7 +9,7 @@ import {Location} from '@angular/common';
 export class MenuComponent implements OnInit {
   @Input() pageTitle = '';
 
-  constructor() {
+  constructor(private location: Location) {
   }
 
   logout(): void {
@@ -17,7 +17,7 @@ export class MenuComponent implements OnInit {
   }
 
   goBack(): void {
-    //this.location.back();
+    this.location.back();
   }
 
   ngOnInit(): void {
