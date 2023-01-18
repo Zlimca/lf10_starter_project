@@ -11,10 +11,12 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     // TODO: Login funktion
+    location.assign("./employees");
   }
 
   resetPassword(): void {
     // TODO: Passwort zurücksetzen
+    console.log("Passwort vergessen");
   }
 
   ngOnInit(): void {
