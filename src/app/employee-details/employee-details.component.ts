@@ -12,7 +12,7 @@ import {Location} from "@angular/common";
 export class EmployeeDetailsComponent implements OnInit {
   public employee?: Employee
   constructor(private route: ActivatedRoute, private employeeService: EmployeeService, private location: Location) { }
-  public pageTitle = "Mitarbeiter-Details :)";
+  public pageTitle = "Mitarbeiter-Details";
 
   ngOnInit(): void {
     this.getEmployee()
@@ -27,7 +27,6 @@ export class EmployeeDetailsComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'))
     this.employeeService.getEmployeeById(id)
       .subscribe(employee => this.employee = employee)
-    this.pageTitle += this.employee?.firstName
   }
 
   getEditMode(): void {

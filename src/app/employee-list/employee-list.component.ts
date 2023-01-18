@@ -10,9 +10,9 @@ import {EmployeeService} from "../employee.service";
 export class EmployeeListComponent implements OnInit {
   employees: Employee[] = []
   selectedEmployee?: Employee
-  heading: string;
+  public pageTitle = "Mitarbeiter-Liste";
+
   constructor(private employeeService: EmployeeService) {
-    this.heading = "Mitarbeiter-Liste";
   }
 
   ngOnInit(): void {
