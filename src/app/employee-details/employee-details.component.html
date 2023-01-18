@@ -1,4 +1,5 @@
 <div *ngIf="employee">
+  <app-menu [pageTitle]= "pageTitle"></app-menu>
   <h2>{{employee.firstName | uppercase}} {{employee.lastName | uppercase}} Details</h2>
   <div>id: {{employee.id}}</div>
   <div>
@@ -8,3 +9,4 @@
   </div>
   <button type="button" (click)="onBack()">Zurück</button>
 </div>
+

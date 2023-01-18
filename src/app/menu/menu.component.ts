@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
+import {Component, Input, OnInit} from '@angular/core';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-menu',
@@ -7,10 +7,10 @@ import { Location } from '@angular/common';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+  @Input() pageTitle = '';
 
-  public pageTitle: string = "test";
-  constructor(
-    ) { }
+  constructor() {
+  }
 
   logout(): void {
 
