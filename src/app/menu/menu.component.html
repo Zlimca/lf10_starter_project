@@ -1,5 +1,11 @@
 <div>
-  <button type="button" (click)="goBack()">Back</button>
-  <h2>{{pageTitle}}</h2>
-  <button type="button" (click)="logout()">Ausloggen</button>
+  <div class="d-flex justify-content-between">
+    <button type="button" (click)="goBack()" class="btn btn-primary btn-sm bi-arrow-left-square-fill"></button>
+  </div>
+  <div class="d-flex justify-content-between">
+    <h2>{{pageTitle}}</h2>
+  </div>
+  <div class="d-flex justify-content-between">
+    <button type="button" (click)="logout()" class="btn btn-primary btn-sm">Ausloggen</button>
+  </div>
 </div>

@@ -1,11 +1,55 @@
-<div *ngIf="employee">
-  <app-menu [pageTitle]= "pageTitle"></app-menu>
-  <h2>{{employee.firstName | uppercase}} {{employee.lastName | uppercase}} Details</h2>
+<app-menu *ngIf="mode === 'd'" [pageTitle]="pageTitle + titleDetails"></app-menu>
+<app-menu *ngIf="mode === 'e'" [pageTitle]="pageTitle + titleEdit"></app-menu>
+<app-menu *ngIf="mode === 'a'" [pageTitle]="pageTitle + titleAdd"></app-menu>
+
+<form *ngIf="employee$ | async as employee" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-row">
+    <div class="form-group col-5">
+      <label class="form-label">Vorname</label>
+      <input *ngIf="mode !== 'd'" type="text" formControlName="firstName" class="form-control"/>
+      <label *ngIf="mode === 'd'" >{{employee.firstName}}</label>
+    </div>
+    <div class="form-group col-5">
+      <label>Nachname</label>
+      <input *ngIf="mode !== 'd'" type="text" formControlName="lastName" class="form-control"/>
+      <label *ngIf="mode === 'd'" >{{employee.lastName}}</label>
+    </div>
+    <div class="form-group col-5">
+      <label>Straße</label>
+      <input *ngIf="mode !== 'd'" type="text" formControlName="street" class="form-control"/>
+      <label *ngIf="mode === 'd'" >{{employee.street}}</label>
+    </div>
+    <div class="form-group col-5">
+      <label>PLZ</label>
+      <input *ngIf="mode !== 'd'" type="text" formControlName="postcode" class="form-control"/>
+      <label *ngIf="mode === 'd'" >{{employee.postcode}}</label>
+    </div>
+    <div class="form-group col-5">
+      <label>Ort</label>
+      <input *ngIf="mode !== 'd'" type="text" formControlName="city" class="form-control"/>
+      <label *ngIf="mode === 'd'" >{{employee.city}}</label>
+    </div>
+    <div class="form-group col-5">
+      <label>Telefonnummer</label>
+      <input *ngIf="mode !== 'd'" type="tel" formControlName="phone" class="form-control"/>
+      <label *ngIf="mode === 'd'" >{{employee.phone}}</label>
+</div>
+  </div>
+  <div *ngIf="mode !== 'd'" class="form-group">
+    <button [disabled]="loading" class="btn btn-primary">
+      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+      Save
+    </button>
+  </div>
+</form>
+
+
+<!--<div *ngIf="employee">
   <div>id: {{employee.id}}</div>
   <div>
     <label for="employee-firstname">Mitarbeitername: </label>
     <input id="employee-firstname" [(ngModel)]="employee.firstName" placeholder="Vorname">
     <input id="employee-lastname" [(ngModel)]="employee.lastName" placeholder="Nachname">
   </div>
-</div>
+</div>-->
 

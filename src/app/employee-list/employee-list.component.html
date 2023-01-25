@@ -1,4 +1,5 @@
 <app-menu [pageTitle]="pageTitle" ></app-menu>
+<button type="button" routerLink="/employee/a" class="btn btn-primary btn-sm">Hinzufügen</button>
 <table class="table">
   <thead class="thead-dark">
     <th>ID</th>
@@ -7,12 +8,12 @@
   </thead>
   <tbody>
     <tr *ngFor="let employee of employees">
-      <td><button type="button" (click)="onSelect(employee)">{{employee.id}}</button></td>
+      <td><button type="button" (click)="onSelect(employee)" class="btn btn-outline-secondary">{{employee.id}}</button></td>
       <td>{{employee.firstName}}</td>
       <td>{{employee.lastName}}</td>
-      <td><button type="button" routerLink="/employee/{{employee.id}}">Details</button></td>
-      <td><button type="button" routerLink="/employee/edit/{{employee.id}}">Bearbeiten</button></td>
-      <td><button type="button" (click)="delete(employee)">Löschen</button></td>
+      <td><button type="button" routerLink="/employee/d/{{employee.id}}" class="btn btn-outline-primary btn-sm">Details</button></td>
+      <td><button type="button" routerLink="/employee/e/{{employee.id}}" class="btn btn-outline-primary btn-sm">Bearbeiten</button></td>
+      <td><button type="button" (click)="delete(employee)" class="btn btn-outline-primary btn-sm">Löschen</button></td>
     </tr>
   </tbody>
 </table>

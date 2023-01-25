@@ -9,7 +9,7 @@ import { EmployeeComponent } from './employee/employee.component';
 import { LoginComponent } from './login/login.component';
 import { MenuComponent } from './menu/menu.component';
 import {RouterModule} from "@angular/router";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
@@ -26,7 +26,8 @@ import { AppRoutingModule } from './app-routing.module';
         HttpClientModule,
         RouterModule,
         FormsModule,
-        AppRoutingModule
+        AppRoutingModule,
+        ReactiveFormsModule
     ],
   providers: [],
   bootstrap: [AppComponent]
