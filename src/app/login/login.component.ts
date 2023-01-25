@@ -14,8 +14,8 @@ export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService) { }
 
   login(): void {
-    // TODO: Login funktion
-    location.assign("./employees");
+    if (this.loginService.checkLogin(this.user, this.token)) location.assign("./employees")
+    else console.log("User or password is incorrect!")
   }
 
   resetPassword(): void {
