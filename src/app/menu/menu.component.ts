@@ -18,6 +18,7 @@ export class MenuComponent implements OnInit {
   }
 
   goBack(): void {
+    this.ngOnInit()
     this.location.back();
   }
 

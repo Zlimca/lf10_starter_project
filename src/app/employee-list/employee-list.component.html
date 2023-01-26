@@ -1,16 +1,24 @@
 <app-menu [pageTitle]="pageTitle" ></app-menu>
 <button type="button" routerLink="/employee/a" class="btn btn-primary btn-sm">Hinzufügen</button>
-<table class="table">
+<table class="table table-hover thead-light">
   <thead class="thead-dark">
     <th>ID</th>
     <th>Name</th>
     <th>Nachname</th>
+    <th>Straße</th>
+    <th>PLZ</th>
+    <th>Ort</th>
+    <th>Tel.Nr.</th>
   </thead>
   <tbody>
     <tr *ngFor="let employee of employees">
-      <td><button type="button" (click)="onSelect(employee)" class="btn btn-outline-secondary">{{employee.id}}</button></td>
+      <td><button type="button" routerLink="/employee/d/{{employee.id}}" class="btn btn-outline-secondary">{{employee.id}}</button></td>
       <td>{{employee.firstName}}</td>
       <td>{{employee.lastName}}</td>
+      <td>{{employee.street}}</td>
+      <td>{{employee.postcode}}</td>
+      <td>{{employee.city}}</td>
+      <td>{{employee.phone}}</td>
       <td><button type="button" routerLink="/employee/d/{{employee.id}}" class="btn btn-outline-primary btn-sm">Details</button></td>
       <td><button type="button" routerLink="/employee/e/{{employee.id}}" class="btn btn-outline-primary btn-sm">Bearbeiten</button></td>
       <td><button type="button" (click)="delete(employee)" class="btn btn-outline-primary btn-sm">Löschen</button></td>

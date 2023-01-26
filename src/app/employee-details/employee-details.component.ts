@@ -3,7 +3,8 @@ import {Employee} from "../Employee";
 import {ActivatedRoute} from "@angular/router";
 import {EmployeeService} from "../employee.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-employee-details',
@@ -15,20 +16,22 @@ export class EmployeeDetailsComponent implements OnInit {
   public titleDetails = 'Details'
   public titleEdit = 'Bearbeiten'
   public titleAdd = 'Hinzufügen'
+  public id: number;
   public employee$: Observable<Employee>
-  public mode: string = 'd' // Modes: d=detail, e=edit, a=add
+  public isEditMode?: boolean
   form: FormGroup
   submitted: boolean = false
   loading: boolean = false
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private employeeService: EmployeeService) {
+  constructor(private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute, private location: Location, private employeeService: EmployeeService) {
     this.form = this.formBuilder.group({})
     this.employee$ = this.getEmployee()
+    this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'))
   }
 
   ngOnInit(): void {
-    this.getMode();
-    if (this.mode !== 'a') this.employee$ = this.getEmployee()
+    this.isEditMode = this.getMode();
+    if (this.id) this.employee$ = this.getEmployee()
 
     this.form = this.formBuilder.group({
       firstName: [''],
@@ -38,22 +41,18 @@ export class EmployeeDetailsComponent implements OnInit {
       city: [''],
       phone: ['']
     })
-    if (this.mode === 'e') {
+    if (this.isEditMode) {
       this.employee$.subscribe(e => this.form.patchValue(e))
     }
   }
 
-  get f() {
-    return this.form.controls
-  }
-
   getEmployee(): Observable<Employee> {
-    const id = Number(this.route.snapshot.paramMap.get('id'))
-    return this.employeeService.getEmployeeById(id)
+    const employee$ = this.employeeService.getEmployeeById(this.id)
+    return employee$ ? employee$ : of(new Employee)
   }
 
-  getMode(): void {
-    this.mode = String(this.route.snapshot.paramMap.get('edit'))
+  getMode(): boolean {
+    return String(this.activatedRoute.snapshot.paramMap.get('edit')) === 'e'
   }
 
   onSubmit() {
@@ -65,16 +64,35 @@ export class EmployeeDetailsComponent implements OnInit {
 
     this.loading = true
 
-    if (this.mode === 'a') this.createEmployee()
-    else if (this.mode === 'e') this.updateEmployee()
+    if (!this.id) this.createEmployee()
+    else if (this.isEditMode) this.updateEmployee()
   }
 
   private createEmployee() {
-    //TODO write create employee
-
+    const employee: Employee = this.form.value
+    this.employee$ = this.employeeService.addEmployee(employee)
+    this.loading = !!this.employee$
+    location.assign('./employees')
   }
 
   private updateEmployee() {
+    const employee: Employee = this.form.value
+    this.employee$ = this.employeeService.updateEmployee(this.id, employee)
+    this.loading = !!this.employee$
+    location.assign(`./employee/e/${this.id}`)
+  }
 
+  public onDelete() {
+    this.employeeService.deleteEmployee(this.id)
+  }
+
+  public changeMode() {
+    this.isEditMode = !this.isEditMode
+    if (this.isEditMode) this.employee$.subscribe(e => this.form.patchValue(e))
+  }
+
+  public getModeText() {
+    if (this.isEditMode) return 'Details'
+    else return 'Bearbeiten'
   }
 }

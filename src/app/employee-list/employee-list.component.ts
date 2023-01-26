@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Employee} from "../Employee";
 import {EmployeeService} from "../employee.service";
+import {first} from "rxjs";
 
 @Component({
   selector: 'app-employee-list',
@@ -9,7 +10,6 @@ import {EmployeeService} from "../employee.service";
 })
 export class EmployeeListComponent implements OnInit {
   employees: Employee[] = []
-  selectedEmployee?: Employee
   public pageTitle = "Mitarbeiter-Liste";
 
   constructor(private employeeService: EmployeeService) {
@@ -19,12 +19,12 @@ export class EmployeeListComponent implements OnInit {
     this.getEmployees()
   }
 
-  onSelect(employee: Employee): void {
-    this.selectedEmployee = employee
-  }
-
   delete(employee: Employee): void {
-    console.log(employee)
+    this.employeeService.deleteEmployee(employee.id)?.pipe(first())
+      .subscribe(employee => this.employees
+        .forEach((e: Employee, i: number) => {
+          if (e.id === employee.id) delete this.employees[i]
+        }))
   }
 
   getEmployees(): void {
