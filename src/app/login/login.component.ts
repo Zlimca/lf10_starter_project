@@ -9,6 +9,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  public loginError = '';
   public user: User
   form: FormGroup
 
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
 
   resetPassword(): void {
     // Password can't be reset due to issues with the backend!
+    this.loginError = "FEHLER, Passwort nicht vergessbar"
     console.log("Passwort vergessen");
   }
 
