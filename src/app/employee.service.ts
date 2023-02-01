@@ -57,7 +57,7 @@ export class EmployeeService {
   deleteEmployee(id: number | undefined): Observable<Employee> | null {
     if (!id) return null
 
-    this.bearer = localStorage.getItem('access_key')
+    this.bearer = localStorage.getItem('access_token')
     return this.http.delete(`${this.root}/${id}`, {
       headers: new HttpHeaders()
         .delete('Content-Type', 'application/json')

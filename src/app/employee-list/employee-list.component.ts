@@ -20,11 +20,9 @@ export class EmployeeListComponent implements OnInit {
   }
 
   delete(employee: Employee): void {
-    this.employeeService.deleteEmployee(employee.id)?.pipe(first())
-      .subscribe(employee => this.employees
-        .forEach((e: Employee, i: number) => {
-          if (e.id === employee.id) delete this.employees[i]
-        }))
+    if(confirm("Möchten Sie den Mitarbeiter " + employee.firstName + " " + employee.lastName + " wirklich löschen?")){
+    this.employeeService.deleteEmployee(employee.id)?.subscribe(() => this.getEmployees())
+    }
   }
 
   getEmployees(): void {

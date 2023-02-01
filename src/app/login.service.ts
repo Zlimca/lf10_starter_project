@@ -11,13 +11,13 @@ export class LoginService {
   constructor() {
   }
 
-  checkLogin(user: User, token: string): boolean {
+  checkLogin(user: User): boolean {
     let found: boolean = false
-
+    console.log(user.token)
     USERS.forEach((value: User) => {
-      if (value.username === user.username && value.password === user.password) {
+      if ((value.username === user.username && value.password === user.password) || !!user.token) {
         found = true
-        localStorage.setItem('access_token', token);
+        localStorage.setItem('access_token', user.token);
       }
     })
     return found

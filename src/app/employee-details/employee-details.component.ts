@@ -83,7 +83,7 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   public onDelete() {
-    this.employeeService.deleteEmployee(this.id)
+    this.employeeService.deleteEmployee(this.id)?.subscribe(() => location.assign('./employees'))
   }
 
   public changeMode() {
@@ -91,8 +91,8 @@ export class EmployeeDetailsComponent implements OnInit {
     if (this.isEditMode) this.employee$.subscribe(e => this.form.patchValue(e))
   }
 
-  public getModeText() {
-    if (this.isEditMode) return 'Details'
-    else return 'Bearbeiten'
+  public getClass() {
+    if (this.isEditMode) return "{ btn btn-outline-primary button-spacing  }"
+    else return "{ btn btn-outline-primary button-spacing bi-pencil-fill }"
   }
 }

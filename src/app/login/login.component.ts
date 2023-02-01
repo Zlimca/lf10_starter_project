@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../user";
 import { LoginService} from "../login.service";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
@@ -9,14 +10,17 @@ import { LoginService} from "../login.service";
 })
 export class LoginComponent implements OnInit {
   public user: User
-  public token: string = ''
-  constructor(private loginService: LoginService) {
-    this.user = {username: '', password: ''}
+  form: FormGroup
+
+  constructor(private loginService: LoginService, private formBuilder: FormBuilder) {
+    this.user = {username: '', password: '', token: ''}
+    this.form = formBuilder.group({})
   }
 
   login(): void {
-    if (this.loginService.checkLogin(this.user, this.token)) location.assign("./employees")
-    else console.log("User or password is incorrect!")
+    this.user = this.form.value
+    if (this.loginService.checkLogin(this.user)) location.assign("./employees")
+    else this.loginError = "Benutzername oder Passwort falsch!"
   }
 
   resetPassword(): void {
@@ -25,7 +29,13 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.user = {username: '', password: ''}
+    this.form = this.formBuilder.group({
+      username: [''],
+      password: [''],
+      token: ['']
+    })
+
+    this.user = {username: '', password: '', token: ''}
   }
 
 }

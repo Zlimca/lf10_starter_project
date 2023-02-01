@@ -2,14 +2,14 @@
 <app-menu *ngIf="isEditMode && id" [pageTitle]="pageTitle + titleEdit"></app-menu>
 <app-menu *ngIf="!id" [pageTitle]="pageTitle + titleAdd"></app-menu>
 <div *ngIf="employee$ | async as employee">
-  <div>
-    <button *ngIf="id" class="btn btn-outline-primary button-spacing" (click)="changeMode()">{{getModeText()}}</button>
-    <button *ngIf="id" class="btn btn-outline-primary" (click)="onDelete()">Löschen</button>
+  <div class="">
+    <button *ngIf="id" [ngClass]="getClass()" class="bi-info-circle-fill" (click)="changeMode()"></button>
+    <button *ngIf="id && isEditMode" class="btn btn-outline-primary bi-trash-fill" (click)="onDelete()"></button>
   </div>
 
   <!--ANZEIGEN-->
   <div *ngIf="id && !isEditMode">
-    <table class="table table-sm table-responsive table-striped table-bordered table-hover thead-light .text-nowrap">
+    <table class="table table-responsive table-bordered .text-nowrap center-table w-auto">
       <tr>
         <th>Vorname</th>
         <td>{{employee.firstName}}</td>
@@ -39,40 +39,42 @@
 
   <!--HINZUFÜGEN / BEARBEITEN-->
   <div *ngIf="!id || isEditMode">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="form-row">
-        <div class="form-group col-5">
-          <h6 class="form-label">Vorname</h6>
-          <input type="text" formControlName="firstName" class="form-control"/>
+    <div>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()">
+        <div class="form-row">
+          <div class="form-group col-xl-12">
+            <h6 class="form-label">Vorname</h6>
+            <input type="text" formControlName="firstName" class="form-control"/>
+          </div>
+          <div class="form-group col-xl-12 form-horizontal">
+            <h6>Nachname</h6>
+            <input type="text" formControlName="lastName" class="form-control"/>
+          </div>
+          <div class="form-group col-xl-12">
+            <h6>Straße</h6>
+            <input type="text" formControlName="street" class="form-control"/>
+          </div>
+          <div class="form-group col-xl-12">
+            <h6>PLZ</h6>
+            <input type="text" formControlName="postcode" class="form-control" [maxLength]="5"/>
+          </div>
+          <div class="form-group col-xl-12">
+            <h6>Ort</h6>
+            <input type="text" formControlName="city" class="form-control"/>
+          </div>
+          <div class="form-group col-xl-12">
+            <h6>Telefonnummer</h6>
+            <input type="tel" formControlName="phone" class="form-control"/>
+          </div>
         </div>
-        <div class="form-group col-5">
-          <h6>Nachname</h6>
-          <input type="text" formControlName="lastName" class="form-control"/>
+        <div class="form-group">
+          <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Save
+          </button>
         </div>
-        <div class="form-group col-5">
-          <h6>Straße</h6>
-          <input type="text" formControlName="street" class="form-control"/>
-        </div>
-        <div class="form-group col-5">
-          <h6>PLZ</h6>
-          <input type="text" formControlName="postcode" class="form-control"/>
-        </div>
-        <div class="form-group col-5">
-          <h6>Ort</h6>
-          <input type="text" formControlName="city" class="form-control"/>
-        </div>
-        <div class="form-group col-5">
-          <h6>Telefonnummer</h6>
-          <input type="tel" formControlName="phone" class="form-control"/>
-        </div>
-      </div>
-      <div class="form-group">
-        <button [disabled]="loading" class="btn btn-primary">
-          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-          Save
-        </button>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </div>
 

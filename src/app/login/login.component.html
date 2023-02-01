@@ -1,15 +1,26 @@
-<div class="">
-  <h1>Login</h1>
-  <div class="form-horizontal " style="width: 25%">
-    <label>Benutzername</label>
-    <input id="username" placeholder="Benutzername" class="form-control" [(ngModel)]="user.username">
-    <label>Passwort</label>
-    <input id="password" placeholder="Passwort" type="password" class="form-control"[(ngModel)]="user.password">
-    <label>Token</label>
-    <input id="token" placeholder="Bearer Token" type="password" class="form-control"[(ngModel)]="token">
-  </div>
-  <div class="">
-  <button type="button" (click)="login()" class="btn btn-primary login-buttons" >Login</button>
-  <button type="button" (click)="resetPassword()" class="btn btn-primary login-buttons">Passwort vergessen</button>
+<div class="d-flex justify-content-center">
+  <div class="form-horizontal mx-auto">
+    <h1>Login</h1>
+    <form [formGroup]="form" (ngSubmit)="login()" (keyup.enter)="login()">
+      <div class="form-row">
+        <div class="form-group col-12">
+          <h5 class="form-label">Benutzername</h5>
+          <input id="username" formControlName="username" class="form-control">
+        </div>
+        <div class="form-group col-12">
+          <h5 class="form-label">Passwort</h5>
+          <input id="password" formControlName="password" type="password" class="form-control">
+        </div>
+        <div class="form-group col-12">
+          <h5 class="form-label">Token</h5>
+          <input id="token" formControlName="token" type="password" class="form-control">
+        </div>
+      </div>
+    </form>
+    <div class="d-flex justify-content-center">
+      <button type="button" (click)="login()" class="btn btn-primary login-buttons">Login</button>
+      <button type="button" (click)="resetPassword()" class="btn btn-primary login-buttons">Passwort vergessen</button>
+    </div>
+    <h5 class="text-danger">{{loginError}}</h5>
   </div>
 </div>

@@ -1,3 +1,9 @@
 .button-spacing {
   margin-right: 10px;
 }
+
+.center-table {
+  margin: 0 auto;
+  display: table;
+  min-width: 20%;
+}
