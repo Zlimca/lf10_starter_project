@@ -95,4 +95,8 @@ export class EmployeeDetailsComponent implements OnInit {
     if (this.isEditMode) return "{ btn btn-outline-primary button-spacing  }"
     else return "{ btn btn-outline-primary button-spacing bi-pencil-fill }"
   }
+
+  public getImageId(){
+    return localStorage.getItem('imageId');
+  }
 }
