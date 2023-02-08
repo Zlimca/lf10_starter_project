@@ -1,27 +1,56 @@
-<app-menu [pageTitle]="pageTitle" ></app-menu>
+<app-menu [pageTitle]="pageTitle"></app-menu>
 <button type="button" routerLink="/employee/a" class="btn btn-primary btn-sm">Hinzufügen</button>
-<table class="table table-hover thead-light">
-  <thead class="thead-dark">
-    <th>ID</th>
+<table class="table table-hover align-middle mb-0 bg-white">
+  <thead class="bg-light">
+  <tr>
+    <th class="text-center">ID</th>
+    <th></th>
     <th>Name</th>
     <th>Nachname</th>
     <th>Straße</th>
     <th>PLZ</th>
     <th>Ort</th>
     <th>Tel.Nr.</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let employee of employees">
-      <td><button type="button" routerLink="/employee/d/{{employee.id}}" class="btn btn-outline-secondary">{{employee.id}}</button></td>
-      <td>{{employee.firstName}}</td>
-      <td>{{employee.lastName}}</td>
-      <td>{{employee.street}}</td>
-      <td>{{employee.postcode}}</td>
-      <td>{{employee.city}}</td>
-      <td>{{employee.phone}}</td>
-      <td><button type="button" routerLink="/employee/d/{{employee.id}}" class="btn btn-outline-primary btn-sm">Details</button></td>
-      <td><button type="button" routerLink="/employee/e/{{employee.id}}" class="btn btn-outline-primary btn-sm">Bearbeiten</button></td>
-      <td><button type="button" (click)="delete(employee)" class="btn btn-outline-primary btn-sm">Löschen</button></td>
-    </tr>
+  <tr *ngFor="let employee of employees">
+    <td>
+      <div class="d-flex align-items-center">
+        <button type="button" routerLink="/employee/d/{{employee.id}}"
+                class="btn btn-outline-secondary">{{employee.id}}</button>
+      </div>
+    </td>
+    <td>
+      <div class="d-flex align-items-center">
+        <img
+          src="https://mdbootstrap.com/img/new/avatars/{{getImgId(employee.id)}}.jpg"
+          class="rounded-circle"
+          alt="Image"
+          style="width: 45px; height: 45px"
+        />
+      </div>
+    </td>
+    <td>{{employee.firstName}}</td>
+    <td>{{employee.lastName}}</td>
+    <td>{{employee.street}}</td>
+    <td>{{employee.postcode}}</td>
+    <td>{{employee.city}}</td>
+    <td>{{employee.phone}}</td>
+    <td>
+      <button type="button" routerLink="/employee/d/{{employee.id}}" (click)="updateImageId(employee.id)" class="btn btn-outline-primary btn-sm">Details
+      </button>
+    </td>
+    <td>
+      <button type="button" routerLink="/employee/e/{{employee.id}}" (click)="updateImageId(employee.id)" class="btn btn-outline-primary btn-sm">Bearbeiten
+      </button>
+    </td>
+    <td>
+      <button type="button" (click)="delete(employee)" class="btn btn-outline-primary btn-sm">Löschen</button>
+    </td>
+  </tr>
   </tbody>
 </table>
