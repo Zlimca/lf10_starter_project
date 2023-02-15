@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   resetPassword(): void {
     // Password can't be reset due to issues with the backend!
-    this.loginError = "FEHLER, Passwort nicht vergessbar"
+    this.loginError = "FEHLER, das Passwort ist nicht änderbar."
     console.log("Passwort vergessen");
   }
 
