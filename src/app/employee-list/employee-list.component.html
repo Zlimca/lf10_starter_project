@@ -4,7 +4,6 @@
   <thead class="bg-light">
   <tr>
     <th class="text-center">ID</th>
-    <th></th>
     <th>Name</th>
     <th>Nachname</th>
     <th>Straße</th>
@@ -22,16 +21,6 @@
       <div class="d-flex align-items-center">
         <button type="button" routerLink="/employee/d/{{employee.id}}"
                 class="btn btn-outline-secondary">{{employee.id}}</button>
-      </div>
-    </td>
-    <td>
-      <div class="d-flex align-items-center">
-        <img
-          src="https://mdbootstrap.com/img/new/avatars/{{getImgId(employee.id)}}.jpg"
-          class="rounded-circle"
-          alt="Image"
-          style="width: 45px; height: 45px"
-        />
       </div>
     </td>
     <td>{{employee.firstName}}</td>
